@@ -36,11 +36,13 @@ def openInput(name):
 
     num_devs = int(content[int(height)+1])
     developers = [Developer(line) for line in content[int(height) + 2 : int(height) + 2 + num_devs]]
+    developers.sort(key=lambda developers: (developers.ci, developers.bi, developers.num_s), reverse=True)
     
     manager_start = int(height) + 1 + num_devs + 1
     num_managers = int(content[manager_start])
 
     managers = [Manager(line) for line in content[manager_start + 1 :]]
+    managers.sort(key=lambda managers: (managers.ci, managers.bi), reverse=True)
 
     # Return both Map and Customer objects
     return office, developers, managers
