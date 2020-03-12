@@ -10,8 +10,8 @@ cost_map = {
 class Office():
     def __init__(self, name, width, height, lines):
         self.name = name
-        self.width = width
-        self.height = height
+        self.width = int(width)
+        self.height = int(height)
         self.sits = self.setSits(lines)
         self.sitMap = self.getSitMap(lines)
         

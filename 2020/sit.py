@@ -27,7 +27,7 @@ class Sit():
                 neighbours.append(person)
         
         if self.x < width -1:
-            person = sit_list[(self.y+1)*(width) + (self.x + 1)].person
+            person = sit_list[(self.y)*(width) + (self.x + 1)].person
             if person != None:
                 neighbours.append(person)
                 

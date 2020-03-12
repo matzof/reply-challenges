@@ -30,7 +30,7 @@ class Manager:
         self.bi = int(line_content[1])
         self.sit = None
 
-    def compareManager(self, person):
+    def compareDev(self, person):
         return self.bi * person.bi
 
     
