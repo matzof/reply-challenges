@@ -6,12 +6,14 @@ import numpy as np
 
 from office import Office
 from developer import Developer
+from developer import Manager
 
 # Custom object classes for the problem
 import plotter
 
 # Configuration for the input files
 input_dir = Path("input/")
+output_path = Path("output/")
 input_files = {
     "a": input_dir / "a_solar.txt",
     "b": input_dir / "b_dream.txt",
@@ -33,15 +35,22 @@ def openInput(name):
     office = Office(name, width, height, content[1 : int(height) + 1])
 
     num_devs = int(content[int(height)+1])
-    developers = [Developer(line) for line in content[int(height)+2 : int(height)+1+num_devs]]
-    for dev in developers:
-        print("Score", developers[0].compareDev(dev))
+    developers = [Developer(line) for line in content[int(height) + 2 : int(height) + 2 + num_devs]]
+    
+    manager_start = int(height) + 1 + num_devs + 1
+    num_managers = int(content[manager_start])
+
+    managers = [Manager(line) for line in content[manager_start + 1 :]]
+
     # Return both Map and Customer objects
     return office, developers, managers
 
 
-if __name__ == '__main__':
-    office, devs, mans = openInput("a")
+
+def computeSolution(file):
+    office, devs, mans = openInput(file)
+
+    output = []
 
     for sit in office.sits:
         if sit.type == '_' and sit.taken == False:
@@ -58,20 +67,33 @@ if __name__ == '__main__':
                     sit.taken = True
                     break               
             
-            
     for dev in devs:
         if dev.sit != None:
-            print(f"{dev.sit.x} {dev.sit.y}")
+            output.append(f"{dev.sit.x} {dev.sit.y}")
         else:
-            print("X")
+            output.append("X")
     
     for man in mans:
         if man.sit != None:
-            print(f"{man.sit.x} {man.sit.y}")
+            output.append(f"{man.sit.x} {man.sit.y}")
         else:
-            print("X")
+            output.append("X")
 
 
-    plotter.plotOffice(office.sitMap)
+    with open(output_path / f"{file}.txt", 'w') as f:
+        for i, line in enumerate(output):
+            if i != (len(output) - 1):
+                f.write(line + '\n')                
+            else:
+                f.write(line)
+
+
+if __name__ == '__main__':
+    inputs = input_files.keys()
+    for input in inputs:
+        computeSolution(input)
+    
+
+    #plotter.plotOffice(office.sitMap)
     
     

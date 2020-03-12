@@ -28,9 +28,14 @@ class Manager:
         line_content = line.rstrip().split(' ')
         self.ci = line_content[0]
         self.bi = int(line_content[1])
+        self.sit = None
 
     def compareManager(self, person):
         return self.bi * person.bi
+
+    
+    def setSit(self, sit):
+        self.sit = sit
     
     def toString(self):
         return f"Company: {self.ci} | Bonus: {self.bi}"

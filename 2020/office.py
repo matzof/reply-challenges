@@ -22,7 +22,6 @@ class Office():
         for y, row in enumerate(char_sits):
             for x, sit in enumerate(row):
                 sits.append(Sit(x,y, sit))
-                print(sits[-1].toString())
         
         return sits
 
