@@ -46,7 +46,6 @@ def openInput(name):
     return office, developers, managers
 
 
-
 def computeSolution(file):
     office, devs, mans = openInput(file)
 
@@ -54,11 +53,23 @@ def computeSolution(file):
 
     for sit in office.sits:
         if sit.type == '_' and sit.taken == False:
-            for dev in devs:
+            neighbors = sit.getNeighbors()
+
+            dev_compatibilities = {}
+
+            for i, dev in enumerate(devs):
                 if dev.sit == None:
-                    dev.setSit(sit)
-                    sit.taken = True
-                    break
+                    dev_compatibility = 0
+                    for neighbor in neighbors:
+                        dev_compatibility = dev_compatibility + neighbor.compareDev(dev)
+                    dev_compatibilities[i] = dev_compatibility
+            
+            dev_index = max(dev_compatibilities, key=lambda key: dev_compatibilities[key])
+            dev = devs[dev_index]
+            dev.setSit(sit)
+            sit.taken = True
+            sit.developer = dev
+                
 
         if sit.type == 'M' and sit.taken == False:
             for man in mans:
