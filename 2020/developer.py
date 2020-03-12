@@ -5,6 +5,7 @@ class Developer:
         self.bi = int(line_content[1])
         self.num_s = int(line_content[2])
         self.skills = set(line_content[3:])
+        self.sit = None
 
     def toString(self):
         return f"Company: {self.ci} | Bonus: {self.bi} | Skills: {self.skills}"
@@ -18,6 +19,9 @@ class Developer:
             return work_score + bonus_score
         except: 
             return self.bi * person.bi  
+
+    def setSit(self, sit):
+        self.sit = sit
 
 class Manager:
     def __init__(self, line):

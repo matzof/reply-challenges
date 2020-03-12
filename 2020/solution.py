@@ -37,16 +37,39 @@ def openInput(name):
     for dev in developers:
         print("Score", developers[0].compareDev(dev))
     # Return both Map and Customer objects
-    return office, developers
+    return office, developers, managers
 
 
 if __name__ == '__main__':
-    office, devs = openInput("a")
+    office, devs, mans = openInput("a")
 
+    for sit in office.sits:
+        if sit.type == '_' and sit.taken == False:
+            for dev in devs:
+                if dev.sit == None:
+                    dev.setSit(sit)
+                    sit.taken = True
+                    break
 
+        if sit.type == 'M' and sit.taken == False:
+            for man in mans:
+                if man.sit == None:
+                    man.setSit(sit)
+                    sit.taken = True
+                    break               
+            
+            
+    for dev in devs:
+        if dev.sit != None:
+            print(f"{dev.sit.x} {dev.sit.y}")
+        else:
+            print("X")
     
-
-
+    for man in mans:
+        if man.sit != None:
+            print(f"{man.sit.x} {man.sit.y}")
+        else:
+            print("X")
 
 
     plotter.plotOffice(office.sitMap)
