@@ -66,9 +66,11 @@ def heuristicSolution(map, customers):
     return cluster_centers
 
 if __name__ == '__main__':
-    map, customers = openInput("oceania")
+    map, customers = openInput("victoria")
     
     offices = heuristicSolution(map, customers)
+    plotter.plotMap(map)
+    plotter.plotMapAndCustomers(map, customers)
     plotter.plotMapCustomersOffices(map, customers, offices)
 
     
