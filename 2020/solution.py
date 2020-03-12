@@ -34,7 +34,8 @@ def openInput(name):
 
     num_devs = int(content[int(height)+1])
     developers = [Developer(line) for line in content[int(height)+2 : int(height)+1+num_devs]]
-    
+    for dev in developers:
+        print("Score", developers[0].compareDev(dev))
     # Return both Map and Customer objects
     return office, developers
 
